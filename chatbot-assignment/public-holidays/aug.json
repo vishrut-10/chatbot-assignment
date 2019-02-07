@@ -1,0 +1,116 @@
+{
+    "type": "AdaptiveCard",
+    "body": [
+        {
+            "type": "Container",
+            "items": [
+                {
+                    "type": "TextBlock",
+                    "separator": true,
+                    "color": "Accent",
+                    "text": "PUBLIC HOLIDAYS 2019"
+                }
+            ]
+        },
+        {
+            "type": "TextBlock",
+            "separator": true,
+            "weight": "Bolder",
+            "color": "Warning",
+            "text": "Month: August"
+        },
+        {
+            "type": "ColumnSet",
+            "separator": true,
+            "columns": [
+                {
+                    "type": "Column",
+                    "items": [
+                        {
+                            "type": "TextBlock",
+                            "horizontalAlignment": "Left",
+                            "size": "Small",
+                            "weight": "Bolder",
+                            "text": "Day",
+                            "isSubtle": true
+                        },
+                        {
+                            "type": "TextBlock",
+                            "size": "Small",
+                            "text": "Thursday"
+                        },
+                        {
+                            "type": "TextBlock",
+                            "size": "Small",
+                            "text": "Thursday"
+                        },
+                        {
+                            "type": "TextBlock",
+                            "size": "Small",
+                            "text": "Saturday"
+                        }
+                    ],
+                    "width": 1
+                },
+                {
+                    "type": "Column",
+                    "items": [
+                        {
+                            "type": "TextBlock",
+                            "size": "Small",
+                            "weight": "Bolder",
+                            "text": "Date",
+                            "isSubtle": true
+                        },
+                        {
+                            "type": "TextBlock",
+                            "size": "Small",
+                            "text": "15 Aug"
+                        },
+                        {
+                            "type": "TextBlock",
+                            "size": "Small",
+                            "text": "15 Aug"
+                        },
+                        {
+                            "type": "TextBlock",
+                            "size": "Small",
+                            "text": "24 Aug"
+                        }
+                    ],
+                    "width": 1
+                },
+                {
+                    "type": "Column",
+                    "items": [
+                        {
+                            "type": "TextBlock",
+                            "size": "Small",
+                            "weight": "Bolder",
+                            "text": "Holiday",
+                            "isSubtle": true
+                        },
+                        {
+                            "type": "TextBlock",
+                            "size": "Small",
+                            "text": "Independence Day"
+                        },
+                        {
+                            "type": "TextBlock",
+                            "size": "Small",
+                            "text": "Raksha Bandhan"
+                        },
+                        {
+                            "type": "TextBlock",
+                            "size": "Small",
+                            "text": "Janmashtami"
+                        }
+                    ],
+                    "width": 1
+                }
+            ]
+        }
+    ],
+    "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+    "version": "1.0"
+}

@@ -1,0 +1,516 @@
+{
+    "type": "AdaptiveCard",
+    "body": [
+        {
+            "type": "Container",
+            "items": [
+                {
+                    "type": "TextBlock",
+                    "separator": true,
+                    "color": "Accent",
+                    "text": "PUBLIC HOLIDAYS 2019"
+                }
+            ]
+        },
+        {
+            "type": "TextBlock",
+            "separator": true,
+            "weight": "Bolder",
+            "color": "Warning",
+            "text": "Month: February"
+        },
+        {
+            "type": "ColumnSet",
+            "separator": true,
+            "columns": [
+                {
+                    "type": "Column",
+                    "items": [
+                        {
+                            "type": "TextBlock",
+                            "horizontalAlignment": "Left",
+                            "size": "Small",
+                            "weight": "Bolder",
+                            "text": "Day",
+                            "isSubtle": true
+                        },
+                        {
+                            "type": "TextBlock",
+                            "size": "Small",
+                            "text": "Sunday"
+                        }
+                    ],
+                    "width": 1
+                },
+                {
+                    "type": "Column",
+                    "items": [
+                        {
+                            "type": "TextBlock",
+                            "size": "Small",
+                            "weight": "Bolder",
+                            "text": "Date",
+                            "isSubtle": true
+                        },
+                        {
+                            "type": "TextBlock",
+                            "size": "Small",
+                            "text": "10 Feb"
+                        }
+                    ],
+                    "width": 1
+                },
+                {
+                    "type": "Column",
+                    "items": [
+                        {
+                            "type": "TextBlock",
+                            "size": "Small",
+                            "weight": "Bolder",
+                            "text": "Holiday",
+                            "isSubtle": true
+                        },
+                        {
+                            "type": "TextBlock",
+                            "size": "Small",
+                            "text": "Basant Panchami"
+                        }
+                    ],
+                    "width": 1
+                }
+            ]
+        },
+        {
+            "type": "TextBlock",
+            "separator": true,
+            "weight": "Bolder",
+            "color": "Warning",
+            "text": "Month: March"
+        },
+        {
+            "type": "ColumnSet",
+            "separator": true,
+            "columns": [
+                {
+                    "type": "Column",
+                    "items": [
+                        {
+                            "type": "TextBlock",
+                            "horizontalAlignment": "Left",
+                            "size": "Small",
+                            "weight": "Bolder",
+                            "text": "Day",
+                            "isSubtle": true
+                        },
+                        {
+                            "type": "TextBlock",
+                            "size": "Small",
+                            "text": "Thursday"
+                        }
+                    ],
+                    "width": 1
+                },
+                {
+                    "type": "Column",
+                    "items": [
+                        {
+                            "type": "TextBlock",
+                            "size": "Small",
+                            "weight": "Bolder",
+                            "text": "Date",
+                            "isSubtle": true
+                        },
+                        {
+                            "type": "TextBlock",
+                            "size": "Small",
+                            "text": "21 Mar"
+                        }
+                    ],
+                    "width": 1
+                },
+                {
+                    "type": "Column",
+                    "items": [
+                        {
+                            "type": "TextBlock",
+                            "size": "Small",
+                            "weight": "Bolder",
+                            "text": "Holiday",
+                            "isSubtle": true
+                        },
+                        {
+                            "type": "TextBlock",
+                            "size": "Small",
+                            "text": "Holi"
+                        }
+                    ],
+                    "width": 1
+                }
+            ]
+        },
+        {
+            "type": "TextBlock",
+            "separator": true,
+            "weight": "Bolder",
+            "color": "Warning",
+            "text": "Month: April"
+        },
+        {
+            "type": "ColumnSet",
+            "separator": true,
+            "columns": [
+                {
+                    "type": "Column",
+                    "items": [
+                        {
+                            "type": "TextBlock",
+                            "horizontalAlignment": "Left",
+                            "size": "Small",
+                            "weight": "Bolder",
+                            "text": "Day",
+                            "isSubtle": true
+                        },
+                        {
+                            "type": "TextBlock",
+                            "size": "Small",
+                            "text": "Saturday"
+                        },
+                        {
+                            "type": "TextBlock",
+                            "size": "Small",
+                            "text": "Sunday"
+                        }
+                    ],
+                    "width": 1
+                },
+                {
+                    "type": "Column",
+                    "items": [
+                        {
+                            "type": "TextBlock",
+                            "size": "Small",
+                            "weight": "Bolder",
+                            "text": "Date",
+                            "isSubtle": true
+                        },
+                        {
+                            "type": "TextBlock",
+                            "size": "Small",
+                            "text": "13 Apr"
+                        },
+                        {
+                            "type": "TextBlock",
+                            "size": "Small",
+                            "text": "14 Apr"
+                        }
+                    ],
+                    "width": 1
+                },
+                {
+                    "type": "Column",
+                    "items": [
+                        {
+                            "type": "TextBlock",
+                            "size": "Small",
+                            "weight": "Bolder",
+                            "text": "Holiday",
+                            "isSubtle": true
+                        },
+                        {
+                            "type": "TextBlock",
+                            "size": "Small",
+                            "text": "Ram Navami"
+                        },
+                        {
+                            "type": "TextBlock",
+                            "size": "Small",
+                            "text": "Vaisakhi"
+                        }
+                    ],
+                    "width": 1
+                }
+            ]
+        },
+        {
+            "type": "TextBlock",
+            "separator": true,
+            "weight": "Bolder",
+            "color": "Warning",
+            "text": "Month: August"
+        },
+        {
+            "type": "ColumnSet",
+            "separator": true,
+            "columns": [
+                {
+                    "type": "Column",
+                    "items": [
+                        {
+                            "type": "TextBlock",
+                            "horizontalAlignment": "Left",
+                            "size": "Small",
+                            "weight": "Bolder",
+                            "text": "Day",
+                            "isSubtle": true
+                        },
+                        {
+                            "type": "TextBlock",
+                            "size": "Small",
+                            "text": "Thursday"
+                        },
+                        {
+                            "type": "TextBlock",
+                            "size": "Small",
+                            "text": "Thursday"
+                        },
+                        {
+                            "type": "TextBlock",
+                            "size": "Small",
+                            "text": "Saturday"
+                        }
+                    ],
+                    "width": 1
+                },
+                {
+                    "type": "Column",
+                    "items": [
+                        {
+                            "type": "TextBlock",
+                            "size": "Small",
+                            "weight": "Bolder",
+                            "text": "Date",
+                            "isSubtle": true
+                        },
+                        {
+                            "type": "TextBlock",
+                            "size": "Small",
+                            "text": "15 Aug"
+                        },
+                        {
+                            "type": "TextBlock",
+                            "size": "Small",
+                            "text": "15 Aug"
+                        },
+                        {
+                            "type": "TextBlock",
+                            "size": "Small",
+                            "text": "24 Aug"
+                        }
+                    ],
+                    "width": 1
+                },
+                {
+                    "type": "Column",
+                    "items": [
+                        {
+                            "type": "TextBlock",
+                            "size": "Small",
+                            "weight": "Bolder",
+                            "text": "Holiday",
+                            "isSubtle": true
+                        },
+                        {
+                            "type": "TextBlock",
+                            "size": "Small",
+                            "text": "Independence Day"
+                        },
+                        {
+                            "type": "TextBlock",
+                            "size": "Small",
+                            "text": "Raksha Bandhan"
+                        },
+                        {
+                            "type": "TextBlock",
+                            "size": "Small",
+                            "text": "Janmashtami"
+                        }
+                    ],
+                    "width": 1
+                }
+            ]
+        },
+        {
+            "type": "TextBlock",
+            "separator": true,
+            "weight": "Bolder",
+            "color": "Warning",
+            "text": "Month: October"
+        },
+        {
+            "type": "ColumnSet",
+            "separator": true,
+            "columns": [
+                {
+                    "type": "Column",
+                    "items": [
+                        {
+                            "type": "TextBlock",
+                            "horizontalAlignment": "Left",
+                            "size": "Small",
+                            "weight": "Bolder",
+                            "text": "Day",
+                            "isSubtle": true
+                        },
+                        {
+                            "type": "TextBlock",
+                            "size": "Small",
+                            "text": "Wednesday"
+                        },
+                        {
+                            "type": "TextBlock",
+                            "size": "Small",
+                            "text": "Tuesday"
+                        },
+                        {
+                            "type": "TextBlock",
+                            "size": "Small",
+                            "text": "Sunday"
+                        },
+                        {
+                            "type": "TextBlock",
+                            "size": "Small",
+                            "text": "Monday"
+                        }
+                    ],
+                    "width": 1
+                },
+                {
+                    "type": "Column",
+                    "items": [
+                        {
+                            "type": "TextBlock",
+                            "size": "Small",
+                            "weight": "Bolder",
+                            "text": "Date",
+                            "isSubtle": true
+                        },
+                        {
+                            "type": "TextBlock",
+                            "size": "Small",
+                            "text": "2 Oct"
+                        },
+                        {
+                            "type": "TextBlock",
+                            "size": "Small",
+                            "text": "8 Oct"
+                        },
+                        {
+                            "type": "TextBlock",
+                            "size": "Small",
+                            "text": "27 Oct"
+                        },
+                        {
+                            "type": "TextBlock",
+                            "size": "Small",
+                            "text": "28 Oct"
+                        }
+                    ],
+                    "width": 1
+                },
+                {
+                    "type": "Column",
+                    "items": [
+                        {
+                            "type": "TextBlock",
+                            "size": "Small",
+                            "weight": "Bolder",
+                            "text": "Holiday",
+                            "isSubtle": true
+                        },
+                        {
+                            "type": "TextBlock",
+                            "size": "Small",
+                            "text": "Gandhi Jayanti"
+                        },
+                        {
+                            "type": "TextBlock",
+                            "size": "Small",
+                            "text": "Dussehra"
+                        },
+                        {
+                            "type": "TextBlock",
+                            "size": "Small",
+                            "text": "Diwali"
+                        },
+                        {
+                            "type": "TextBlock",
+                            "size": "Small",
+                            "text": "Diwali"
+                        }
+                    ],
+                    "width": 1
+                }
+            ]
+        },
+        {
+            "type": "TextBlock",
+            "separator": true,
+            "weight": "Bolder",
+            "color": "Warning",
+            "text": "Month: December"
+        },
+        {
+            "type": "ColumnSet",
+            "separator": true,
+            "columns": [
+                {
+                    "type": "Column",
+                    "items": [
+                        {
+                            "type": "TextBlock",
+                            "horizontalAlignment": "Left",
+                            "size": "Small",
+                            "weight": "Bolder",
+                            "text": "Day",
+                            "isSubtle": true
+                        },
+                        {
+                            "type": "TextBlock",
+                            "size": "Small",
+                            "text": "Wednesday"
+                        }
+                    ],
+                    "width": 1
+                },
+                {
+                    "type": "Column",
+                    "items": [
+                        {
+                            "type": "TextBlock",
+                            "size": "Small",
+                            "weight": "Bolder",
+                            "text": "Date",
+                            "isSubtle": true
+                        },
+                        {
+                            "type": "TextBlock",
+                            "size": "Small",
+                            "text": "25 Dec"
+                        }
+                    ],
+                    "width": 1
+                },
+                {
+                    "type": "Column",
+                    "items": [
+                        {
+                            "type": "TextBlock",
+                            "size": "Small",
+                            "weight": "Bolder",
+                            "text": "Holiday",
+                            "isSubtle": true
+                        },
+                        {
+                            "type": "TextBlock",
+                            "size": "Small",
+                            "text": "Christmas"
+                        }
+                    ],
+                    "width": 1
+                }
+            ]
+        }
+    ],
+    "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+    "version": "1.0"
+}
