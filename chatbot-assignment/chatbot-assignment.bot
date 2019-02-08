@@ -8,6 +8,16 @@
             "appId": "",
             "appPassword": "",
             "id": "1"
+        },
+        {
+            "type": "luis",
+            "name": "UserInfoLuisBot",
+            "appId": "49e9564f-c8dd-4e90-b668-eaf874270fb2",
+            "version": "0.1",
+            "authoringKey": "aa56407b9262480a9191b2e0bb7da276",
+            "subscriptionKey": "aa56407b9262480a9191b2e0bb7da276",
+            "region": "westus",
+            "id": "158"
         }
     ],
     "padlock": "",
