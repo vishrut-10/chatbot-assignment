@@ -10,15 +10,19 @@ const PublicAugHolidays = require('./public-holidays/aug.json');
 const PublicOctHolidays = require('./public-holidays/oct.json');
 const PublicDecHolidays = require('./public-holidays/dec.json');
 const PublicHolidays    = require('./public-holidays/all-holidays.json');
+const USER_PROFILE_PROPERTY = 'userProfile';
 
 class NagarroHolidayManager {
 
-    constructor(application, luisPredictionOptions) {
+    constructor(application, luisPredictionOptions, userState) {
         this.luisRecognizer = new LuisRecognizer(
             application,
             luisPredictionOptions,
             true
         );
+
+        this.userProfile = userState.createProperty(USER_PROFILE_PROPERTY);
+        this.userState = userState;
     }
 
     async onTurn(turnContext) {
@@ -57,7 +61,7 @@ class NagarroHolidayManager {
                 } else if (retVal === -1) {
                     filteredCard = PublicHolidaysCards[6];
                 } else {
-                    await turnContext.sendActivity("There are no public holidays in this month");
+                    await turnContext.sendActivity("There are no public holidays available in this month");
                     flag = false;
                 }
 
@@ -93,7 +97,7 @@ class NagarroHolidayManager {
                 } else if (retVal === -1) {
                     filteredCard = createHeroCardofAllFlexibleHolidays();
                 } else {
-                    // await turnContext.sendActivity("There are no flexible holidays in this month");
+                    await turnContext.sendActivity("There are no flexible holidays available in this month");
                     flag = false;
                 }
 
@@ -104,12 +108,34 @@ class NagarroHolidayManager {
                     // Send hero card to the user.
                     await turnContext.sendActivity(reply);
                 }
+            } else if (topIntent.intent === 'opting flexi') {
+                const userProfile = await this.userProfile.get(turnContext, {});
+                let value = turnContext.activity.text;
 
-                var text = turnContext.activity.text;
-
-                if (text === "flexible holidays") {
-                    await turnContext.sendActivity("avail");
+                if (!userProfile.firstFlexi && !userProfile.secondFlexi && !userProfile.thirdFlexi) {
+                    userProfile.firstFlexi = value.substr(value.length-6);
+                    await turnContext.sendActivity(
+                        `You have successfully opted flexible leave of ${userProfile.firstFlexi}` 
+                    );
+                } else if (userProfile.firstFlexi && !userProfile.secondFlexi && !userProfile.thirdFlexi) {
+                    userProfile.secondFlexi = value.substr(value.length-6);
+                    await turnContext.sendActivity(
+                        `You have successfully opted flexible leave of ${userProfile.secondFlexi}` 
+                    );
+                } else if (userProfile.firstFlexi && userProfile.secondFlexi && !userProfile.thirdFlexi) {
+                    userProfile.thirdFlexi = value.substr(value.length-6);
+                    await turnContext.sendActivity(
+                        `You have successfully opted flexible leave of ${userProfile.thirdFlexi}` 
+                    );
+                } else {
+                    await turnContext.sendActivity(
+                        `Sorry you can't opted further. You already have 3 flexible leaves of ${userProfile.firstFlexi}, 
+                        ${userProfile.secondFlexi}, ${userProfile.thirdFlexi}`
+                    );
                 }
+
+                await this.userProfile.set(turnContext, userProfile);
+                await this.userState.saveChanges(turnContext);
             } else {
                 await turnContext.sendActivity("Sorry, i can't understand. Please try with valid input.");
             }
@@ -123,7 +149,7 @@ function createHeroCardofMarch()
         {
             type: ActionTypes.ImBack,
             title: 'Maha Shivaratri (4 Mar)',
-            value: 'flexible holidays'
+            value: 'opting flexi on 4 Mar'
         }
     ];
 
@@ -146,7 +172,7 @@ function createHeroCardofApril()
         {
             type: ActionTypes.ImBack,
             title: 'Good Friday (19 Apr)',
-            value: 'flexible holidays'
+            value: 'opting flexi on 19 Apr'
         }
     ];
 
@@ -169,7 +195,7 @@ function createHeroCardofMay()
         {
             type: ActionTypes.ImBack,
             title: 'Nagarro\'s Day of Reason (25 May)',
-            value: 'flexible holidays'
+            value: 'opting flexi on 25 May'
         }
     ];
 
@@ -192,7 +218,7 @@ function createHeroCardofJune()
         {
             type: ActionTypes.ImBack,
             title: 'Idul Fitr (5 Jun)',
-            value: 'flexible holidays'
+            value: 'opting flexi on 5 Jun'
         }
     ];
 
@@ -215,7 +241,7 @@ function createHeroCardofAug()
         {
             type: ActionTypes.ImBack,
             title: 'Idul Juha (12 Aug)',
-            value: 'flexible holidays'
+            value: 'opting flexi on 12 Aug'
         }
     ];
 
@@ -238,12 +264,12 @@ function createHeroCardofSept()
         {
             type: ActionTypes.ImBack,
             title: 'Ganesh Chaturthi (2 Sep)',
-            value: 'flexible holidays'
+            value: 'opting flexi on 2 Sep'
         },
         {
             type: ActionTypes.ImBack,
             title: 'Onam (11 Sep)',
-            value: 'flexible holidays'
+            value: 'opting flexi on 11 Sep'
         }
     ];
 
@@ -266,7 +292,7 @@ function createHeroCardofOct()
         {
             type: ActionTypes.ImBack,
             title: 'Bhai Dooj (29 Oct)',
-            value: 'flexible holidays'
+            value: 'opting flexi on 29 Oct'
         }
     ];
 
@@ -289,7 +315,7 @@ function createHeroCardofNov()
         {
             type: ActionTypes.ImBack,
             title: 'Guru Nanak Jayanti (12 Nov)',
-            value: 'flexible holidays'
+            value: 'opting flexi on 12 Nov'
         }
     ];
 
@@ -312,47 +338,47 @@ function createHeroCardofAllFlexibleHolidays()
         {
             type: ActionTypes.ImBack,
             title: 'Maha Shivaratri (4 Mar)',
-            value: 'flexible holidays'
+            value: 'opting flexi on 4 Mar'
         },
 		{
             type: ActionTypes.ImBack,
             title: 'Good Friday (19 Apr)',
-            value: 'flexible holidays'
+            value: 'opting flexi on 19 Apr'
         },
 		{
             type: ActionTypes.ImBack,
             title: 'Nagarro\'s Day of Reason (25 May)',
-            value: 'flexible holidays'
+            value: 'opting flexi on 25 May'
         },
 		{
             type: ActionTypes.ImBack,
             title: 'Idul Fitr (5 Jun)',
-            value: 'flexible holidays'
+            value: 'opting flexi on 5 Jun'
         },
 		{
             type: ActionTypes.ImBack,
             title: 'Idul Juha (12 Aug)',
-            value: 'flexible holidays'
+            value: 'opting flexi on 12 Aug'
         },
 		{
             type: ActionTypes.ImBack,
             title: 'Ganesh Chaturthi (2 Sep)',
-            value: 'flexible holidays'
+            value: 'opting flexi on 2 Sep'
         },
         {
             type: ActionTypes.ImBack,
             title: 'Onam (11 Sep)',
-            value: 'flexible holidays'
+            value: 'opting flexi on 11 Sep'
         },
 		{
             type: ActionTypes.ImBack,
             title: 'Bhai Dooj (29 Oct)',
-            value: 'flexible holidays'
+            value: 'opting flexi on 29 Oct'
         },
 		{
             type: ActionTypes.ImBack,
             title: 'Guru Nanak Jayanti (12 Nov)',
-            value: 'flexible holidays'
+            value: 'opting flexi on 12 Nov'
         }
     ];
 
