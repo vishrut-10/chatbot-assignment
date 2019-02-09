@@ -109,11 +109,11 @@ adapter.onTurnError = async (context, error) => {
 
 // Create conversation and user state with in-memory storage provider.
 const memoryStorage = new MemoryStorage();
-const conversationState = new ConversationState(memoryStorage);
+// const conversationState = new ConversationState(memoryStorage);
 const userState = new UserState(memoryStorage);
 
 // Create the main dialog.
-const myBot = new MyBot(luisApplication, luisPredictionOptions);
+const myBot = new MyBot(luisApplication, luisPredictionOptions, userState);
 
 // Listen for incoming requests.
 server.post('/api/messages', (req, res) => {
