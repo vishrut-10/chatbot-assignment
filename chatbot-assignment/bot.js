@@ -42,6 +42,7 @@ class NagarroHolidayManager {
 
             const results = await this.luisRecognizer.recognize(turnContext);
             const topIntent = results.luisResult.topScoringIntent;
+            console.log(topIntent.intent);
 
             if (topIntent.intent === 'public holidays') {
                 let filteredCard;
@@ -112,7 +113,7 @@ class NagarroHolidayManager {
                     await turnContext.sendActivity(reply);
                 }
             } else if (topIntent.intent === 'opting flexi') {
-                const userProfile = await this.userProfile.get(turnContext, {});
+                var userProfile = await this.userProfile.get(turnContext, {});
                 let value = turnContext.activity.text;
                 let res = validateDate(value);
 
@@ -159,7 +160,7 @@ class NagarroHolidayManager {
                 const PublicHolidays = [
                     '3/21/2019', '8/15/2019', '10/2/2019', '10/8/2019', '10/28/2019', '12/25/2019' 
                 ];
-                const leaveProfile = await this.leaveProfile.get(turnContext, {});
+                var leaveProfile = await this.leaveProfile.get(turnContext, {});
                 let message = results.luisResult.entities;
                 let date, day;
 
@@ -183,21 +184,82 @@ class NagarroHolidayManager {
                             await turnContext.sendActivity(`Leave submitted successfully of date: ${date}`);
                         } else {
                             if (leaveProfile.leaveRemaining > 0) {
-                                leaveProfile.leaveTaken++;
-                                leaveProfile.leaveRemaining--;
-                                leaveProfile.record.push(date);
-                                console.log(leaveProfile.record);
-                                await turnContext.sendActivity(`Leave submitted successfully of date: ${date}`);
+                                if (leaveProfile.record.includes(date)) {
+                                    await turnContext.sendActivity(`You already opted leave for date: ${date}`);
+                                } else {
+                                    leaveProfile.leaveTaken++;
+                                    leaveProfile.leaveRemaining--;
+                                    leaveProfile.record.push(date);
+                                    console.log(leaveProfile.record);
+                                    await turnContext.sendActivity(`Leave submitted successfully of date: ${date}`);
+                                }
                             } else {
                                 await turnContext.sendActivity("You have taken 27 leaves, so you can't take further.");
                             }
                         }
-                    }
+                    } 
                 } else {
                     await turnContext.sendActivity("Please provide the date of your planned leave and try again.");
                 }
                 await this.leaveProfile.set(turnContext, leaveProfile);
                 await this.userState.saveChanges(turnContext);
+            } else if (topIntent.intent === 'submitted flexi requests') {
+                await turnContext.sendActivity("Flexible Requests are: ");
+                userProfile = await this.userProfile.get(turnContext, {});
+                if (userProfile && userProfile.firstFlexi) {
+                    // console.log(userProfile.firstFlexi);
+                    await turnContext.sendActivity(`${userProfile.firstFlexi}, `);
+                }
+
+                if (userProfile &&  userProfile.secondFlexi) {
+                    // console.log(userProfile.secondFlexi);
+                    await turnContext.sendActivity(`${userProfile.firstFlexi}, `);
+                }
+
+                if (userProfile &&  userProfile.thirdFlexi) {
+                    // console.log(userProfile.thirdFlexi);
+                    await turnContext.sendActivity(`${userProfile.firstFlexi}`);
+                }
+            } else if (topIntent.intent === 'submitted leave requests') {
+                leaveProfile = await this.leaveProfile.get(turnContext, {});
+                await turnContext.sendActivity("Leave Requests are: ");
+
+                if (leaveProfile && leaveProfile.record) {
+                    for (let i = 0; i < leaveProfile.record.length; i++) {
+                        // console.log(leaveProfile.record[i]);
+                        await turnContext.sendActivity(`${leaveProfile.record[i]}`);
+                    }
+                }
+            } else if (topIntent.intent === 'submitted requests') {
+                await turnContext.sendActivity("Flexible Requests are: ");
+                userProfile = await this.userProfile.get(turnContext, {});
+                leaveProfile = await this.leaveProfile.get(turnContext, {});
+
+                console.log(userProfile);
+                
+                if (userProfile && userProfile.firstFlexi) {
+                    // console.log(userProfile.firstFlexi);
+                    await turnContext.sendActivity(`${userProfile.firstFlexi}, `);
+                }
+
+                if (userProfile &&  userProfile.secondFlexi) {
+                    // console.log(userProfile.secondFlexi);
+                    await turnContext.sendActivity(`${userProfile.firstFlexi}, `);
+                }
+
+                if (userProfile &&  userProfile.thirdFlexi) {
+                    // console.log(userProfile.thirdFlexi);
+                    await turnContext.sendActivity(`${userProfile.firstFlexi}`);
+                }
+
+                await turnContext.sendActivity("Leave Requests are: ");
+
+                if (leaveProfile && leaveProfile.record) {
+                    for (let i = 0; i < leaveProfile.record.length; i++) {
+                        // console.log(leaveProfile.record[i]);
+                        await turnContext.sendActivity(`${leaveProfile.record[i]}`);
+                    }
+                }
             } else {
                 await turnContext.sendActivity("Sorry, i can't understand. Please try with valid input.");
             }
