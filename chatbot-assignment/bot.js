@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 const { ActivityTypes, CardFactory, ActionTypes } = require('botbuilder');
+const Recognizers = require('@microsoft/recognizers-text-suite');
 const { LuisRecognizer } = require('botbuilder-ai');
 const PublicFebHolidays = require('./public-holidays/feb.json');
 const PublicMarHolidays = require('./public-holidays/march.json');
@@ -11,6 +12,7 @@ const PublicOctHolidays = require('./public-holidays/oct.json');
 const PublicDecHolidays = require('./public-holidays/dec.json');
 const PublicHolidays    = require('./public-holidays/all-holidays.json');
 const USER_PROFILE_PROPERTY = 'userProfile';
+const LEAVE_PROFILE_PROPERTY = 'leaveProfile';
 
 class NagarroHolidayManager {
 
@@ -22,6 +24,7 @@ class NagarroHolidayManager {
         );
 
         this.userProfile = userState.createProperty(USER_PROFILE_PROPERTY);
+        this.leaveProfile = userState.createProperty(LEAVE_PROFILE_PROPERTY);
         this.userState = userState;
     }
 
@@ -111,22 +114,38 @@ class NagarroHolidayManager {
             } else if (topIntent.intent === 'opting flexi') {
                 const userProfile = await this.userProfile.get(turnContext, {});
                 let value = turnContext.activity.text;
+                let res = validateDate(value);
 
                 if (!userProfile.firstFlexi && !userProfile.secondFlexi && !userProfile.thirdFlexi) {
-                    userProfile.firstFlexi = value.substr(value.length-6);
+                    userProfile.firstFlexi = res.date;
                     await turnContext.sendActivity(
                         `You have successfully opted flexible leave of ${userProfile.firstFlexi}` 
                     );
                 } else if (userProfile.firstFlexi && !userProfile.secondFlexi && !userProfile.thirdFlexi) {
-                    userProfile.secondFlexi = value.substr(value.length-6);
-                    await turnContext.sendActivity(
-                        `You have successfully opted flexible leave of ${userProfile.secondFlexi}` 
-                    );
+                    userProfile.secondFlexi = res.date;
+                    if (userProfile.secondFlexi === userProfile.firstFlexi) {
+                        await turnContext.sendActivity(
+                            `You have already opted flexible leave of ${userProfile.secondFlexi}` 
+                        );
+                        delete userProfile.secondFlexi;
+                    } else {
+                        await turnContext.sendActivity(
+                            `You have successfully opted flexible leave of ${userProfile.secondFlexi}` 
+                        );
+                    }
                 } else if (userProfile.firstFlexi && userProfile.secondFlexi && !userProfile.thirdFlexi) {
-                    userProfile.thirdFlexi = value.substr(value.length-6);
-                    await turnContext.sendActivity(
-                        `You have successfully opted flexible leave of ${userProfile.thirdFlexi}` 
-                    );
+                    userProfile.thirdFlexi = res.date;
+
+                    if (userProfile.thirdFlexi === userProfile.firstFlexi || userProfile.thirdFlexi === userProfile.secondFlexi) {
+                        await turnContext.sendActivity(
+                            `You have already opted flexible leave of ${userProfile.thirdFlexi}` 
+                        );
+                        delete userProfile.thirdFlexi;
+                    } else {
+                        await turnContext.sendActivity(
+                            `You have successfully opted flexible leave of ${userProfile.thirdFlexi}` 
+                        );
+                    }
                 } else {
                     await turnContext.sendActivity(
                         `Sorry you can't opted further. You already have 3 flexible leaves of ${userProfile.firstFlexi}, 
@@ -136,10 +155,102 @@ class NagarroHolidayManager {
 
                 await this.userProfile.set(turnContext, userProfile);
                 await this.userState.saveChanges(turnContext);
+            } else if (topIntent.intent === 'opting leave') {
+                const PublicHolidays = [
+                    '3/21/2019', '8/15/2019', '10/2/2019', '10/8/2019', '10/28/2019', '12/25/2019' 
+                ];
+                const leaveProfile = await this.leaveProfile.get(turnContext, {});
+                let message = results.luisResult.entities;
+                let date, day;
+
+                if (message.length > 0) {
+                    date = validateDate(message[0].entity).date;
+                    let d = new Date(date);
+                    day = d.getDay();
+                    console.log(day);
+
+                    if (day === 0 || day === 6) {
+                        await turnContext.sendActivity("You can't opted leave on this day because this day occours on weekend.");
+                    } else if (PublicHolidays.includes(date)) {
+                        await turnContext.sendActivity("You can't opted leave on this day because this day occours public holidays.");
+                    } else {
+                        if (!leaveProfile.leaveTaken) {
+                            leaveProfile.leaveTaken = 1;
+                            leaveProfile.leaveRemaining = 26;
+                            leaveProfile.record = [];
+                            leaveProfile.record.push(date);
+                            console.log(leaveProfile.record);
+                            await turnContext.sendActivity(`Leave submitted successfully of date: ${date}`);
+                        } else {
+                            if (leaveProfile.leaveRemaining > 0) {
+                                leaveProfile.leaveTaken++;
+                                leaveProfile.leaveRemaining--;
+                                leaveProfile.record.push(date);
+                                console.log(leaveProfile.record);
+                                await turnContext.sendActivity(`Leave submitted successfully of date: ${date}`);
+                            } else {
+                                await turnContext.sendActivity("You have taken 27 leaves, so you can't take further.");
+                            }
+                        }
+                    }
+                } else {
+                    await turnContext.sendActivity("Please provide the date of your planned leave and try again.");
+                }
+                await this.leaveProfile.set(turnContext, leaveProfile);
+                await this.userState.saveChanges(turnContext);
             } else {
                 await turnContext.sendActivity("Sorry, i can't understand. Please try with valid input.");
             }
         }
+    }
+}
+
+function validateDate(input) {
+    // Try to recognize the input as a date-time. This works for responses such as "11/14/2018", "today at 9pm", "tomorrow", "Sunday at 5pm", and so on.
+    // The recognizer returns a list of potential recognition results, if any.
+    try {
+        const results = Recognizers.recognizeDateTime(
+            input,
+            Recognizers.Culture.English
+        );
+        const now = new Date();
+        const earliest = now.getTime() + 60 * 60 * 1000;
+        let output;
+        results.forEach(function(result) {
+            // result.resolution is a dictionary, where the "values" entry contains the processed input.
+            result.resolution['values'].forEach(function(resolution) {
+                // The processed input contains a "value" entry if it is a date-time value, or "start" and
+                // "end" entries if it is a date-time range.
+                const datevalue =
+                    resolution['value'] || resolution['start'];
+                // If only time is given, assume it's for today.
+                const datetime =
+                    resolution['type'] === 'time'
+                        ? new Date(
+                            `${ now.toLocaleDateString() } ${ datevalue }`
+                        )
+                        : new Date(datevalue);
+                if (datetime && earliest < datetime.getTime()) {
+                    output = {
+                        success: true,
+                        date: datetime.toLocaleDateString()
+                    };
+                }
+            });
+        });
+        return (
+            output || {
+                success: false,
+                message:
+                    "I'm sorry, please enter a date at least an hour out."
+            }
+        );
+    } catch (error) {
+        return {
+            success: false,
+            message:
+                "I'm sorry, I could not interpret that as an appropriate date. Please enter a date at least an hour out."
+        };
     }
 }
 
