@@ -208,6 +208,13 @@ class NagarroHolidayManager {
                 let fs = require('fs');
                 userProfile = await this.userProfile.get(turnContext, {});
                 var file_data;
+                let msg = results.luisResult.entities, flag = false, retVal;
+
+                if (msg.length > 0) {
+                    console.log(msg);
+                    flag = true;
+                    retVal = convertEntityToMonth(msg);
+                }
 
                 try {
                     fs.readFile('flexibleRequests.json', async (err, data) => {
@@ -216,31 +223,62 @@ class NagarroHolidayManager {
                         // console.log(file_data);
                         let date, day;
                         
-                        if (userProfile.firstFlexi) {
+                        if (userProfile.firstFlexi && flag == false) {
                             date = new Date(userProfile.firstFlexi);
                             day = date.getDay();
                             file_data = file_data.replace("$day1", week[day]);
                             file_data = file_data.replace("$date1", userProfile.firstFlexi);
+                        } else if (userProfile.firstFlexi && flag == true) {
+                            date = new Date(userProfile.firstFlexi);
+
+                            if (date.getMonth() === retVal-1) {
+                                day = date.getDay();
+                                file_data = file_data.replace("$day1", week[day]);
+                                file_data = file_data.replace("$date1", userProfile.firstFlexi);
+                            } else {
+                                file_data = file_data.replace("$day1", " ");
+                                file_data = file_data.replace("$date1", " ");
+                            }
                         } else {
                             file_data = file_data.replace("$day1", " ");
                             file_data = file_data.replace("$date1", " ");
                         }
 
-                        if (userProfile.secondFlexi) {
+                        if (userProfile.secondFlexi && flag == false) {
                             date = new Date(userProfile.secondFlexi);
                             day = date.getDay();
                             file_data = file_data.replace("$day2", week[day]);
                             file_data = file_data.replace("$date2", userProfile.secondFlexi);
+                        } else if (userProfile.secondFlexi && flag == true) {
+                            date = new Date(userProfile.secondFlexi);
+                            if (date.getMonth() === retVal-1) {
+                                day = date.getDay();
+                                file_data = file_data.replace("$day2", week[day]);
+                                file_data = file_data.replace("$date2", userProfile.secondFlexi);
+                            } else {
+                                file_data = file_data.replace("$day2", " ");
+                                file_data = file_data.replace("$date2", " ");
+                            }
                         } else {
                             file_data = file_data.replace("$day2", " ");
                             file_data = file_data.replace("$date2", " ");
                         }
 
-                        if (userProfile.thirdFlexi) {
+                        if (userProfile.thirdFlexi && falg == false) {
                             date = new Date(userProfile.thirdFlexi);
                             day = date.getDay();
                             file_data = file_data.replace("$day3", week[day]);
                             file_data = file_data.replace("$date3", userProfile.thirdFlexi);
+                        } else if (userProfile.thirdFlexi && flag == true) {
+                            date = new Date(userProfile.thirdFlexi);
+                            if (date.getMonth() === retVal-1) {
+                                day = date.getDay();
+                                file_data = file_data.replace("$day3", week[day]);
+                                file_data = file_data.replace("$date3", userProfile.thirdFlexi);
+                            } else {
+                                file_data = file_data.replace("$day3", " ");
+                                file_data = file_data.replace("$date3", " ");
+                            }
                         } else {
                             file_data = file_data.replace("$day3", " ");
                             file_data = file_data.replace("$date3", " ");
@@ -262,7 +300,13 @@ class NagarroHolidayManager {
             } else if (topIntent.intent === 'submitted leave requests') {
                 let fs = require('fs');
                 leaveProfile = await this.leaveProfile.get(turnContext, {});
+                let msg = results.luisResult.entities, flag = false, retVal;
 
+                if (msg.length > 0) {
+                    console.log(msg);
+                    flag = true;
+                    retVal = convertEntityToMonth(msg);
+                }
 
                 try {
                     fs.readFile('leaveRequests.json', async (err, data) => {
@@ -271,7 +315,7 @@ class NagarroHolidayManager {
                         // console.log(file_data);
                         let date, day;
                         
-                        if (leaveProfile.record) {
+                        if (leaveProfile.record && flag == false) {
                             for (let i = 0; i < leaveProfile.record.length; i++) {
                                 date = new Date(leaveProfile.record[i]);
                                 day = date.getDay();
@@ -281,6 +325,44 @@ class NagarroHolidayManager {
                                 fromText = "$date" + i;
                                 toText = leaveProfile.record[i];
                                 file_data = file_data.replace(fromText, toText);
+                            }
+                            
+                            for (let i = leaveProfile.record.length; i < 27; i++) {
+                                let fromText = "$day" + i;
+                                let toText = " ";
+                                file_data = file_data.replace(fromText, toText);
+                                fromText = "$date" + i;
+                                toText = " ";
+                                file_data = file_data.replace(fromText, toText);
+                            }
+                            
+                            const reply = {
+                                attachments: [CardFactory.adaptiveCard(JSON.parse(file_data))]
+                            };
+
+                            await turnContext.sendActivity(reply);
+                        } else if (leaveProfile.record && flag == true) {
+                            let month;
+                            for (let i = 0; i < leaveProfile.record.length; i++) {
+                                date = new Date(leaveProfile.record[i]);
+                                month = date.getMonth();
+
+                                if (month == retVal-1) {
+                                    day = date.getDay();
+                                    let fromText = "$day" + i;
+                                    let toText = week[day];
+                                    file_data = file_data.replace(fromText, toText);
+                                    fromText = "$date" + i;
+                                    toText = leaveProfile.record[i];
+                                    file_data = file_data.replace(fromText, toText);
+                                } else {
+                                    let fromText = "$day" + i;
+                                    let toText = " ";
+                                    file_data = file_data.replace(fromText, toText);
+                                    fromText = "$date" + i;
+                                    toText = " ";
+                                    file_data = file_data.replace(fromText, toText);
+                                }
                             }
                             
                             for (let i = leaveProfile.record.length; i < 27; i++) {
