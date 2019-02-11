@@ -43,6 +43,7 @@ class NagarroHolidayManager {
             const results = await this.luisRecognizer.recognize(turnContext);
             const topIntent = results.luisResult.topScoringIntent;
             console.log(topIntent.intent);
+            const week = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thrusday", "Friday", "Saturday"];
 
             if (topIntent.intent === 'public holidays') {
                 let filteredCard;
@@ -204,61 +205,201 @@ class NagarroHolidayManager {
                 await this.leaveProfile.set(turnContext, leaveProfile);
                 await this.userState.saveChanges(turnContext);
             } else if (topIntent.intent === 'submitted flexi requests') {
-                await turnContext.sendActivity("Flexible Requests are: ");
+                let fs = require('fs');
                 userProfile = await this.userProfile.get(turnContext, {});
-                if (userProfile && userProfile.firstFlexi) {
-                    // console.log(userProfile.firstFlexi);
-                    await turnContext.sendActivity(`${userProfile.firstFlexi}, `);
-                }
+                var file_data;
 
-                if (userProfile &&  userProfile.secondFlexi) {
-                    // console.log(userProfile.secondFlexi);
-                    await turnContext.sendActivity(`${userProfile.firstFlexi}, `);
-                }
+                try {
+                    fs.readFile('flexibleRequests.json', async (err, data) => {
+                        if (err) throw err;
+                        file_data = data.toString();
+                        // console.log(file_data);
+                        let date, day;
+                        
+                        if (userProfile.firstFlexi) {
+                            date = new Date(userProfile.firstFlexi);
+                            day = date.getDay();
+                            file_data = file_data.replace("$day1", week[day]);
+                            file_data = file_data.replace("$date1", userProfile.firstFlexi);
+                        } else {
+                            file_data = file_data.replace("$day1", " ");
+                            file_data = file_data.replace("$date1", " ");
+                        }
 
-                if (userProfile &&  userProfile.thirdFlexi) {
-                    // console.log(userProfile.thirdFlexi);
-                    await turnContext.sendActivity(`${userProfile.firstFlexi}`);
+                        if (userProfile.secondFlexi) {
+                            date = new Date(userProfile.secondFlexi);
+                            day = date.getDay();
+                            file_data = file_data.replace("$day2", week[day]);
+                            file_data = file_data.replace("$date2", userProfile.secondFlexi);
+                        } else {
+                            file_data = file_data.replace("$day2", " ");
+                            file_data = file_data.replace("$date2", " ");
+                        }
+
+                        if (userProfile.thirdFlexi) {
+                            date = new Date(userProfile.thirdFlexi);
+                            day = date.getDay();
+                            file_data = file_data.replace("$day3", week[day]);
+                            file_data = file_data.replace("$date3", userProfile.thirdFlexi);
+                        } else {
+                            file_data = file_data.replace("$day3", " ");
+                            file_data = file_data.replace("$date3", " ");
+                        }
+
+                        // console.log("after reading" + file_data);
+
+                        const reply = {
+                            attachments: [CardFactory.adaptiveCard(JSON.parse(file_data))]
+                        };
+        
+                        await turnContext.sendActivity(reply);
+                    });
+                } catch (err) {
+                    throw err;
+                } finally {
+                    fs.close();
                 }
             } else if (topIntent.intent === 'submitted leave requests') {
+                let fs = require('fs');
                 leaveProfile = await this.leaveProfile.get(turnContext, {});
-                await turnContext.sendActivity("Leave Requests are: ");
 
-                if (leaveProfile && leaveProfile.record) {
-                    for (let i = 0; i < leaveProfile.record.length; i++) {
-                        // console.log(leaveProfile.record[i]);
-                        await turnContext.sendActivity(`${leaveProfile.record[i]}`);
-                    }
+
+                try {
+                    fs.readFile('leaveRequests.json', async (err, data) => {
+                        if (err) throw err;
+                        file_data = data.toString();
+                        // console.log(file_data);
+                        let date, day;
+                        
+                        if (leaveProfile.record) {
+                            for (let i = 0; i < leaveProfile.record.length; i++) {
+                                date = new Date(leaveProfile.record[i]);
+                                day = date.getDay();
+                                let fromText = "$day" + i;
+                                let toText = week[day];
+                                file_data = file_data.replace(fromText, toText);
+                                fromText = "$date" + i;
+                                toText = leaveProfile.record[i];
+                                file_data = file_data.replace(fromText, toText);
+                            }
+                            
+                            for (let i = leaveProfile.record.length; i < 27; i++) {
+                                let fromText = "$day" + i;
+                                let toText = " ";
+                                file_data = file_data.replace(fromText, toText);
+                                fromText = "$date" + i;
+                                toText = " ";
+                                file_data = file_data.replace(fromText, toText);
+                            }
+                            
+                            const reply = {
+                                attachments: [CardFactory.adaptiveCard(JSON.parse(file_data))]
+                            };
+
+                            await turnContext.sendActivity(reply);
+                        } else {
+                            await turnContext.sendActivity("You have taken no leave requests.");
+                        }
+                    });
+                } catch (err) {
+                    throw err;
+                } finally {
+                    fs.close();
                 }
             } else if (topIntent.intent === 'submitted requests') {
-                await turnContext.sendActivity("Flexible Requests are: ");
+                let fs = require('fs');
+                let fs1 = require('fs');
                 userProfile = await this.userProfile.get(turnContext, {});
                 leaveProfile = await this.leaveProfile.get(turnContext, {});
+                var file_data, file_data1;
 
-                console.log(userProfile);
-                
-                if (userProfile && userProfile.firstFlexi) {
-                    // console.log(userProfile.firstFlexi);
-                    await turnContext.sendActivity(`${userProfile.firstFlexi}, `);
-                }
+                try {
+                    fs.readFile('flexibleRequests.json', async (err, data) => {
+                        if (err) throw err;
+                        file_data = data.toString();
+                        // console.log(file_data);
+                        let date, day;
+                        
+                        if (userProfile.firstFlexi) {
+                            date = new Date(userProfile.firstFlexi);
+                            day = date.getDay();
+                            file_data = file_data.replace("$day1", week[day]);
+                            file_data = file_data.replace("$date1", userProfile.firstFlexi);
+                        } else {
+                            file_data = file_data.replace("$day1", " ");
+                            file_data = file_data.replace("$date1", " ");
+                        }
 
-                if (userProfile &&  userProfile.secondFlexi) {
-                    // console.log(userProfile.secondFlexi);
-                    await turnContext.sendActivity(`${userProfile.firstFlexi}, `);
-                }
+                        if (userProfile.secondFlexi) {
+                            date = new Date(userProfile.secondFlexi);
+                            day = date.getDay();
+                            file_data = file_data.replace("$day2", week[day]);
+                            file_data = file_data.replace("$date2", userProfile.secondFlexi);
+                        } else {
+                            file_data = file_data.replace("$day2", " ");
+                            file_data = file_data.replace("$date2", " ");
+                        }
 
-                if (userProfile &&  userProfile.thirdFlexi) {
-                    // console.log(userProfile.thirdFlexi);
-                    await turnContext.sendActivity(`${userProfile.firstFlexi}`);
-                }
+                        if (userProfile.thirdFlexi) {
+                            date = new Date(userProfile.thirdFlexi);
+                            day = date.getDay();
+                            file_data = file_data.replace("$day3", week[day]);
+                            file_data = file_data.replace("$date3", userProfile.thirdFlexi);
+                        } else {
+                            file_data = file_data.replace("$day3", " ");
+                            file_data = file_data.replace("$date3", " ");
+                        }
 
-                await turnContext.sendActivity("Leave Requests are: ");
+                        // console.log("after reading" + file_data);
 
-                if (leaveProfile && leaveProfile.record) {
-                    for (let i = 0; i < leaveProfile.record.length; i++) {
-                        // console.log(leaveProfile.record[i]);
-                        await turnContext.sendActivity(`${leaveProfile.record[i]}`);
-                    }
+                        const reply = {
+                            attachments: [CardFactory.adaptiveCard(JSON.parse(file_data))]
+                        };
+        
+                        await turnContext.sendActivity(reply);
+                    });
+
+                    fs1.readFile('leaveRequests.json', async (err, data1) => {
+                        if (err) throw err;
+                        file_data1 = data1.toString();
+                        // console.log(file_data);
+                        let date, day;
+                        
+                        if (leaveProfile.record) {
+                            for (let i = 0; i < leaveProfile.record.length; i++) {
+                                date = new Date(leaveProfile.record[i]);
+                                day = date.getDay();
+                                let fromText = "$day" + i;
+                                let toText = week[day];
+                                file_data1 = file_data1.replace(fromText, toText);
+                                fromText = "$date" + i;
+                                toText = leaveProfile.record[i];
+                                file_data1 = file_data1.replace(fromText, toText);
+                            }
+                            
+                            for (let i = leaveProfile.record.length; i < 27; i++) {
+                                let fromText = "$day" + i;
+                                let toText = " ";
+                                file_data1 = file_data1.replace(fromText, toText);
+                                fromText = "$date" + i;
+                                toText = " ";
+                                file_data1 = file_data1.replace(fromText, toText);
+                            }
+                            
+                            const reply1 = {
+                                attachments: [CardFactory.adaptiveCard(JSON.parse(file_data1))]
+                            };
+
+                            await turnContext.sendActivity(reply1);
+                        } else {
+                            await turnContext.sendActivity("You have taken no leave requests.");
+                        }
+                    });
+                } catch (err) {
+                    throw err;
+                } finally {
+                    fs.close();
+                    fs1.close();
                 }
             } else {
                 await turnContext.sendActivity("Sorry, i can't understand. Please try with valid input.");
@@ -367,8 +508,8 @@ function createHeroCardofMay()
     let buttons = [
         {
             type: ActionTypes.ImBack,
-            title: 'Nagarro\'s Day of Reason (25 May)',
-            value: 'opting flexi on 25 May'
+            title: 'Nagarro\'s Day of Reason (24 May)',
+            value: 'opting flexi on 24 May'
         }
     ];
 
@@ -520,8 +661,8 @@ function createHeroCardofAllFlexibleHolidays()
         },
 		{
             type: ActionTypes.ImBack,
-            title: 'Nagarro\'s Day of Reason (25 May)',
-            value: 'opting flexi on 25 May'
+            title: 'Nagarro\'s Day of Reason (24 May)',
+            value: 'opting flexi on 24 May'
         },
 		{
             type: ActionTypes.ImBack,
