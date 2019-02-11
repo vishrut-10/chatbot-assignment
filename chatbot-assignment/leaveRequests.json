@@ -1,0 +1,350 @@
+{
+    "type": "AdaptiveCard",
+    "body": [
+        {
+            "type": "Container",
+            "items": [
+                {
+                    "type": "TextBlock",
+                    "separator": true,
+                    "color": "Accent",
+                    "text": "Your Leave Requests"
+                }
+            ]
+        },
+        {
+            "type": "ColumnSet",
+            "separator": true,
+            "columns": [
+                {
+                    "type": "Column",
+                    "items": [
+                        {
+                            "type": "TextBlock",
+                            "horizontalAlignment": "Left",
+                            "size": "Small",
+                            "weight": "Bolder",
+                            "text": "Day",
+                            "isSubtle": true
+                        },
+                        {
+                            "type": "TextBlock",
+                            "size": "Small",
+                            "text": "$day0"
+                        },
+                        {
+                            "type": "TextBlock",
+                            "size": "Small",
+                            "text": "$day1"
+                        },
+                        {
+                            "type": "TextBlock",
+                            "size": "Small",
+                            "text": "$day2"
+                        },
+                        {
+                            "type": "TextBlock",
+                            "size": "Small",
+                            "text": "$day3"
+                        },
+                        {
+                            "type": "TextBlock",
+                            "size": "Small",
+                            "text": "$day4"
+                        },
+                        {
+                            "type": "TextBlock",
+                            "size": "Small",
+                            "text": "$day5"
+                        },
+                        {
+                            "type": "TextBlock",
+                            "size": "Small",
+                            "text": "$day6"
+                        },
+                        {
+                            "type": "TextBlock",
+                            "size": "Small",
+                            "text": "$day7"
+                        },
+                        {
+                            "type": "TextBlock",
+                            "size": "Small",
+                            "text": "$day8"
+                        },
+                        {
+                            "type": "TextBlock",
+                            "size": "Small",
+                            "text": "$day9"
+                        },
+                        {
+                            "type": "TextBlock",
+                            "size": "Small",
+                            "text": "$day10"
+                        },
+                        {
+                            "type": "TextBlock",
+                            "size": "Small",
+                            "text": "$day11"
+                        },
+                        {
+                            "type": "TextBlock",
+                            "size": "Small",
+                            "text": "$day12"
+                        },
+                        {
+                            "type": "TextBlock",
+                            "size": "Small",
+                            "text": "$day13"
+                        },
+                        {
+                            "type": "TextBlock",
+                            "size": "Small",
+                            "text": "$day14"
+                        },
+                        {
+                            "type": "TextBlock",
+                            "size": "Small",
+                            "text": "$day15"
+                        },
+                        {
+                            "type": "TextBlock",
+                            "size": "Small",
+                            "text": "$day16"
+                        },
+                        {
+                            "type": "TextBlock",
+                            "size": "Small",
+                            "text": "$day17"
+                        },
+                        {
+                            "type": "TextBlock",
+                            "size": "Small",
+                            "text": "$day18"
+                        },
+                        {
+                            "type": "TextBlock",
+                            "size": "Small",
+                            "text": "$day19"
+                        },
+                        {
+                            "type": "TextBlock",
+                            "size": "Small",
+                            "text": "$day20"
+                        },
+                        {
+                            "type": "TextBlock",
+                            "size": "Small",
+                            "text": "$day21"
+                        },
+                        {
+                            "type": "TextBlock",
+                            "size": "Small",
+                            "text": "$day22"
+                        },
+                        {
+                            "type": "TextBlock",
+                            "size": "Small",
+                            "text": "$day23"
+                        },
+                        {
+                            "type": "TextBlock",
+                            "size": "Small",
+                            "text": "$day24"
+                        },
+                        {
+                            "type": "TextBlock",
+                            "size": "Small",
+                            "text": "$day25"
+                        },
+                        {
+                            "type": "TextBlock",
+                            "size": "Small",
+                            "text": "$day26"
+                        }
+                    ],
+                    "width": 1
+                },
+                {
+                    "type": "Column",
+                    "horizontalAlignment": "Right",
+                    "items": [
+                        {
+                            "type": "TextBlock",
+                            "horizontalAlignment": "Right",
+                            "size": "Small",
+                            "weight": "Bolder",
+                            "text": "Date",
+                            "isSubtle": true
+                        },
+                        {
+                            "type": "TextBlock",
+                            "horizontalAlignment": "Right",
+                            "size": "Small",
+                            "text": "$date0"
+                        },
+                        {
+                            "type": "TextBlock",
+                            "horizontalAlignment": "Right",
+                            "size": "Small",
+                            "text": "$date1"
+                        },
+                        {
+                            "type": "TextBlock",
+                            "horizontalAlignment": "Right",
+                            "size": "Small",
+                            "text": "$date2"
+                        },
+                        {
+                            "type": "TextBlock",
+                            "horizontalAlignment": "Right",
+                            "size": "Small",
+                            "text": "$date3"
+                        },
+                        {
+                            "type": "TextBlock",
+                            "horizontalAlignment": "Right",
+                            "size": "Small",
+                            "text": "$date4"
+                        },
+                        {
+                            "type": "TextBlock",
+                            "horizontalAlignment": "Right",
+                            "size": "Small",
+                            "text": "$date5"
+                        },
+                        {
+                            "type": "TextBlock",
+                            "horizontalAlignment": "Right",
+                            "size": "Small",
+                            "text": "$date6"
+                        },
+                        {
+                            "type": "TextBlock",
+                            "horizontalAlignment": "Right",
+                            "size": "Small",
+                            "text": "$date7"
+                        },
+                        {
+                            "type": "TextBlock",
+                            "horizontalAlignment": "Right",
+                            "size": "Small",
+                            "text": "$date8"
+                        },
+                        {
+                            "type": "TextBlock",
+                            "horizontalAlignment": "Right",
+                            "size": "Small",
+                            "text": "$date9"
+                        },
+                        {
+                            "type": "TextBlock",
+                            "horizontalAlignment": "Right",
+                            "size": "Small",
+                            "text": "$date10"
+                        },
+                        {
+                            "type": "TextBlock",
+                            "horizontalAlignment": "Right",
+                            "size": "Small",
+                            "text": "$date11"
+                        },
+                        {
+                            "type": "TextBlock",
+                            "horizontalAlignment": "Right",
+                            "size": "Small",
+                            "text": "$date12"
+                        },
+                        {
+                            "type": "TextBlock",
+                            "horizontalAlignment": "Right",
+                            "size": "Small",
+                            "text": "$date13"
+                        },
+                        {
+                            "type": "TextBlock",
+                            "horizontalAlignment": "Right",
+                            "size": "Small",
+                            "text": "$date14"
+                        },
+                        {
+                            "type": "TextBlock",
+                            "horizontalAlignment": "Right",
+                            "size": "Small",
+                            "text": "$date15"
+                        },
+                        {
+                            "type": "TextBlock",
+                            "horizontalAlignment": "Right",
+                            "size": "Small",
+                            "text": "$date16"
+                        },
+                        {
+                            "type": "TextBlock",
+                            "horizontalAlignment": "Right",
+                            "size": "Small",
+                            "text": "$date17"
+                        },
+                        {
+                            "type": "TextBlock",
+                            "horizontalAlignment": "Right",
+                            "size": "Small",
+                            "text": "$date18"
+                        },
+                        {
+                            "type": "TextBlock",
+                            "horizontalAlignment": "Right",
+                            "size": "Small",
+                            "text": "$date19"
+                        },
+                        {
+                            "type": "TextBlock",
+                            "horizontalAlignment": "Right",
+                            "size": "Small",
+                            "text": "$date20"
+                        },
+                        {
+                            "type": "TextBlock",
+                            "horizontalAlignment": "Right",
+                            "size": "Small",
+                            "text": "$date21"
+                        },
+                        {
+                            "type": "TextBlock",
+                            "horizontalAlignment": "Right",
+                            "size": "Small",
+                            "text": "$date22"
+                        },
+                        {
+                            "type": "TextBlock",
+                            "horizontalAlignment": "Right",
+                            "size": "Small",
+                            "text": "$date23"
+                        },
+                        {
+                            "type": "TextBlock",
+                            "horizontalAlignment": "Right",
+                            "size": "Small",
+                            "text": "$date24"
+                        },
+                        {
+                            "type": "TextBlock",
+                            "horizontalAlignment": "Right",
+                            "size": "Small",
+                            "text": "$date25"
+                        },
+                        {
+                            "type": "TextBlock",
+                            "horizontalAlignment": "Right",
+                            "size": "Small",
+                            "text": "$date26"
+                        }
+                    ],
+                    "width": 1
+                }
+            ]
+        }
+    ],
+    "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+    "version": "1.0"
+}

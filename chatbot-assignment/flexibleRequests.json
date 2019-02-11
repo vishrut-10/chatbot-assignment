@@ -1,0 +1,86 @@
+{
+    "type": "AdaptiveCard",
+    "body": [
+        {
+            "type": "Container",
+            "items": [
+                {
+                    "type": "TextBlock",
+                    "separator": true,
+                    "color": "Accent",
+                    "text": "Your Flexible Requests"
+                }
+            ]
+        },
+        {
+            "type": "ColumnSet",
+            "separator": true,
+            "columns": [
+                {
+                    "type": "Column",
+                    "items": [
+                        {
+                            "type": "TextBlock",
+                            "horizontalAlignment": "Left",
+                            "size": "Small",
+                            "weight": "Bolder",
+                            "text": "Day",
+                            "isSubtle": true
+                        },
+                        {
+                            "type": "TextBlock",
+                            "size": "Small",
+                            "text": "$day1"
+                        },
+                        {
+                            "type": "TextBlock",
+                            "size": "Small",
+                            "text": "$day2"
+                        },
+                        {
+                            "type": "TextBlock",
+                            "size": "Small",
+                            "text": "$day3"
+                        }
+                    ],
+                    "width": 1
+                },
+                {
+                    "type": "Column",
+                    "horizontalAlignment": "Right",
+                    "items": [
+                        {
+                            "type": "TextBlock",
+                            "horizontalAlignment": "Right",
+                            "size": "Small",
+                            "weight": "Bolder",
+                            "text": "Date",
+                            "isSubtle": true
+                        },
+                        {
+                            "type": "TextBlock",
+                            "horizontalAlignment": "Right",
+                            "size": "Small",
+                            "text": "$date1"
+                        },
+                        {
+                            "type": "TextBlock",
+                            "horizontalAlignment": "Right",
+                            "size": "Small",
+                            "text": "$date2"
+                        },
+                        {
+                            "type": "TextBlock",
+                            "horizontalAlignment": "Right",
+                            "size": "Small",
+                            "text": "$date3"
+                        }
+                    ],
+                    "width": 1
+                }
+            ]
+        }
+    ],
+    "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+    "version": "1.0"
+}
