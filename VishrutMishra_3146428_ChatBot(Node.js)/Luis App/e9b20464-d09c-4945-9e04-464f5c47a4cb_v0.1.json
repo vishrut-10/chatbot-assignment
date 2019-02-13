@@ -1,0 +1,211 @@
+{
+  "luis_schema_version": "3.2.0",
+  "versionId": "0.1",
+  "name": "chatbot-assignment",
+  "desc": "my nagp assignment on chatbot",
+  "culture": "en-us",
+  "tokenizerVersion": "1.0.0",
+  "intents": [
+    {
+      "name": "flexible holidays"
+    },
+    {
+      "name": "None"
+    },
+    {
+      "name": "opting flexi"
+    },
+    {
+      "name": "opting leave"
+    },
+    {
+      "name": "public holidays"
+    },
+    {
+      "name": "submitted flexi requests"
+    },
+    {
+      "name": "submitted leave requests"
+    },
+    {
+      "name": "submitted requests"
+    }
+  ],
+  "entities": [],
+  "composites": [],
+  "closedLists": [],
+  "patternAnyEntities": [],
+  "regex_entities": [],
+  "prebuiltEntities": [
+    {
+      "name": "datetimeV2",
+      "roles": []
+    }
+  ],
+  "model_features": [],
+  "regex_features": [],
+  "patterns": [],
+  "utterances": [
+    {
+      "text": "apply for a leave on 22nd march",
+      "intent": "opting leave",
+      "entities": []
+    },
+    {
+      "text": "details of leave i have applied for",
+      "intent": "submitted leave requests",
+      "entities": []
+    },
+    {
+      "text": "details of my flexible leaves",
+      "intent": "submitted flexi requests",
+      "entities": []
+    },
+    {
+      "text": "details of my flexible leaves of march",
+      "intent": "submitted flexi requests",
+      "entities": []
+    },
+    {
+      "text": "details of my leave requests",
+      "intent": "submitted leave requests",
+      "entities": []
+    },
+    {
+      "text": "details of my leaves of march",
+      "intent": "submitted leave requests",
+      "entities": []
+    },
+    {
+      "text": "details of my submitted requests",
+      "intent": "submitted requests",
+      "entities": []
+    },
+    {
+      "text": "display my leaves",
+      "intent": "submitted leave requests",
+      "entities": []
+    },
+    {
+      "text": "hello",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "i want to take a leave",
+      "intent": "opting leave",
+      "entities": []
+    },
+    {
+      "text": "i will be on leave on 2nd week of may",
+      "intent": "opting leave",
+      "entities": []
+    },
+    {
+      "text": "my flexible leaves",
+      "intent": "submitted flexi requests",
+      "entities": []
+    },
+    {
+      "text": "my flexies",
+      "intent": "submitted flexi requests",
+      "entities": []
+    },
+    {
+      "text": "my leaves",
+      "intent": "submitted leave requests",
+      "entities": []
+    },
+    {
+      "text": "my leaves of april",
+      "intent": "submitted leave requests",
+      "entities": []
+    },
+    {
+      "text": "my requests",
+      "intent": "submitted requests",
+      "entities": []
+    },
+    {
+      "text": "opting flexi on 12 nov",
+      "intent": "opting flexi",
+      "entities": []
+    },
+    {
+      "text": "show flexible holidays",
+      "intent": "flexible holidays",
+      "entities": []
+    },
+    {
+      "text": "show for june 2019",
+      "intent": "flexible holidays",
+      "entities": []
+    },
+    {
+      "text": "show for march",
+      "intent": "flexible holidays",
+      "entities": []
+    },
+    {
+      "text": "show me my upcoming flexible holidays",
+      "intent": "submitted flexi requests",
+      "entities": []
+    },
+    {
+      "text": "show my flexible leaves",
+      "intent": "submitted flexi requests",
+      "entities": []
+    },
+    {
+      "text": "show my leave requests",
+      "intent": "submitted leave requests",
+      "entities": []
+    },
+    {
+      "text": "show my opted flexible holidays for the month of march",
+      "intent": "submitted flexi requests",
+      "entities": []
+    },
+    {
+      "text": "show my requests",
+      "intent": "submitted requests",
+      "entities": []
+    },
+    {
+      "text": "show my requests of april",
+      "intent": "submitted requests",
+      "entities": []
+    },
+    {
+      "text": "show my upcoming submitted requests",
+      "intent": "submitted requests",
+      "entities": []
+    },
+    {
+      "text": "show public holidays",
+      "intent": "public holidays",
+      "entities": []
+    },
+    {
+      "text": "show upcoming flexible holidays",
+      "intent": "flexible holidays",
+      "entities": []
+    },
+    {
+      "text": "show upcoming flexible holidays for april",
+      "intent": "flexible holidays",
+      "entities": []
+    },
+    {
+      "text": "show upcoming holidays",
+      "intent": "public holidays",
+      "entities": []
+    },
+    {
+      "text": "show upcoming holidays of march 2019",
+      "intent": "public holidays",
+      "entities": []
+    }
+  ],
+  "settings": []
+}

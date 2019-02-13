@@ -1,0 +1,25 @@
+{
+    "name": "chatbot-assignment",
+    "services": [
+        {
+            "type": "endpoint",
+            "name": "development",
+            "endpoint": "http://localhost:3978/api/messages",
+            "appId": "",
+            "appPassword": "",
+            "id": "1"
+        },
+        {
+            "type": "luis",
+            "name": "UserInfoLuisBot",
+            "appId": "e9b20464-d09c-4945-9e04-464f5c47a4cb",
+            "version": "0.1",
+            "authoringKey": "aa56407b9262480a9191b2e0bb7da276",
+            "subscriptionKey": "aa56407b9262480a9191b2e0bb7da276",
+            "region": "westus",
+            "id": "158"
+        }
+    ],
+    "padlock": "",
+    "version": "2.0"
+}

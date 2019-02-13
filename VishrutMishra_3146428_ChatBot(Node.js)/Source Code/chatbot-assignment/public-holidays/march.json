@@ -1,0 +1,86 @@
+{
+    "type": "AdaptiveCard",
+    "body": [
+        {
+            "type": "Container",
+            "items": [
+                {
+                    "type": "TextBlock",
+                    "separator": true,
+                    "color": "Accent",
+                    "text": "PUBLIC HOLIDAYS 2019"
+                }
+            ]
+        },
+        {
+            "type": "TextBlock",
+            "separator": true,
+            "weight": "Bolder",
+            "color": "Warning",
+            "text": "Month: March"
+        },
+        {
+            "type": "ColumnSet",
+            "separator": true,
+            "columns": [
+                {
+                    "type": "Column",
+                    "items": [
+                        {
+                            "type": "TextBlock",
+                            "horizontalAlignment": "Left",
+                            "size": "Small",
+                            "weight": "Bolder",
+                            "text": "Day",
+                            "isSubtle": true
+                        },
+                        {
+                            "type": "TextBlock",
+                            "size": "Small",
+                            "text": "Thursday"
+                        }
+                    ],
+                    "width": 1
+                },
+                {
+                    "type": "Column",
+                    "items": [
+                        {
+                            "type": "TextBlock",
+                            "size": "Small",
+                            "weight": "Bolder",
+                            "text": "Date",
+                            "isSubtle": true
+                        },
+                        {
+                            "type": "TextBlock",
+                            "size": "Small",
+                            "text": "21 Mar"
+                        }
+                    ],
+                    "width": 1
+                },
+                {
+                    "type": "Column",
+                    "items": [
+                        {
+                            "type": "TextBlock",
+                            "size": "Small",
+                            "weight": "Bolder",
+                            "text": "Holiday",
+                            "isSubtle": true
+                        },
+                        {
+                            "type": "TextBlock",
+                            "size": "Small",
+                            "text": "Holi"
+                        }
+                    ],
+                    "width": 1
+                }
+            ]
+        }
+    ],
+    "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+    "version": "1.0"
+}
